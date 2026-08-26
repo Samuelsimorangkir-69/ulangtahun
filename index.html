@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday! ❤️</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .font-cursive {
+      font-family: 'Dancing Script', cursive;
+    }
+    /* Animasi Lilin Menyala */
+    .flame {
+      animation: burn 0.5s infinite alternate ease-in-out;
+      transform-origin: center bottom;
+    }
+    @keyframes burn {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-rose-50 text-gray-800 min-h-screen flex flex-col justify-between items-center p-4">
+
+  <div class="fixed inset-0 pointer-events-none overflow-hidden" id="effects-bg"></div>
+
+  <main class="max-w-md w-full bg-white rounded-3xl shadow-xl p-6 text-center my-auto border border-rose-100 relative z-10">
+    
+    <div class="mb-5">
+      <span class="text-3xl">✨🎉</span>
+      <h1 class="text-3xl font-bold text-rose-600 mt-1 font-cursive">Selamat Ulang Tahun!</h1>
+      <p class="text-lg font-semibold text-gray-700">Untuk Ribka🎉 </p>
+    </div>
+
+    <div class="relative w-36 h-36 mx-auto mb-5">
+      <div class="w-full h-full rounded-full overflow-hidden border-4 border-rose-300 shadow-md">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500" alt="Special Someone" class="w-full h-full object-cover">
+      </div>
+      <span class="absolute bottom-1 right-1 text-2xl animate-bounce">💖</span>
+    </div>
+
+    <div class="bg-rose-50/70 rounded-2xl p-4 border border-rose-200 mb-6 text-left shadow-sm">
+      <p class="text-sm text-gray-600 leading-relaxed mb-2">
+        Selamat bertambah usia ya! Semoga di umur yang baru ini kamu makin bahagia, sehat selalu, dan semua impianmu perlahan tercapai. 
+      </p>
+      <p class="text-sm text-gray-600 leading-relaxed">
+    Nanti aja ya kue realnya yaa 😊
+      </p>
+    </div>
+
+    <div class="border-t border-rose-100 pt-4">
+      <p id="cake-instruction" class="text-xs font-medium text-rose-500 mb-3 animate-pulse">
+        👇 Klik kuenya untuk tiup lilin & buka pesan rahasia!
+      </p>
+
+      <div onclick="blowCandle()" class="cursor-pointer inline-block transform hover:scale-105 transition duration-300 active:scale-95 group">
+        <svg class="w-36 h-36 mx-auto drop-shadow-md" viewBox="0 0 200 200">
+          <path id="flame" class="flame fill-amber-400" d="M100 35 C95 48 97 53 100 58 C103 53 105 48 100 35 Z" />
+          <circle id="flame-core" class="flame fill-yellow-200" cx="100" cy="52" r="3" />
+          
+          <rect x="97" y="58" width="6" height="22" rx="2" fill="#f43f5e" />
+          <rect x="97" y="62" width="6" height="3" fill="#ffffff" opacity="0.6" />
+          <rect x="97" y="70" width="6" height="3" fill="#ffffff" opacity="0.6" />
+
+          <path d="M50 110 C 50 100, 150 100, 150 110 L 150 85 C 150 80, 50 80, 50 85 Z" fill="#f472b6" />
+          <path d="M50 110 C 60 120, 70 105, 80 118 C 90 108, 100 122, 110 112 C 120 120, 130 106, 140 118 C 145 110, 150 112, 150 110 L 150 100 C 150 100, 50 100, 50 100 Z" fill="#fff1f2" />
+          
+          <path d="M40 150 C 40 138, 160 138, 160 150 L 160 110 C 160 110, 40 110, 40 110 Z" fill="#fb7185" />
+          <path d="M40 150 C 40 162, 160 162, 160 150 L 160 142 C 160 154, 40 154, 40 142 Z" fill="#e11d48" />
+
+          <ellipse cx="100" cy="158" rx="70" ry="10" fill="#cbd5e1" />
+          <ellipse cx="100" cy="156" rx="65" ry="8" fill="#f8fafc" />
+        </svg>
+      </div>
+
+      <div id="secret-note" class="hidden opacity-0 transform translate-y-2 transition-all duration-700 ease-out mt-4 bg-gradient-to-r from-rose-100 to-pink-100 border-2 border-dashed border-rose-300 rounded-2xl p-4 text-left shadow-inner">
+        <div class="flex items-center space-x-2 mb-2">
+          <span class="text-xl">💌</span>
+          <h3 class="font-bold text-rose-700 text-sm">Catatan Spesial Hari Ini:</h3>
+        </div>
+        <p class="text-xs text-gray-700 leading-relaxed font-medium">
+          "Semoga lilinnya mati dan semua doa-doamu terkabul ya!"
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-xs text-rose-400 mt-4 mb-2 text-center">
+    Dibuat dengan ❤️ oleh Sam 
+  </footer>
+
+  <script>
+    let isBlown = false;
+
+    function blowCandle() {
+      if (isBlown) return;
+      isBlown = true;
+
+      // Matikan Api Lilin
+      document.getElementById('flame').style.display = 'none';
+      document.getElementById('flame-core').style.display = 'none';
+
+      // Ubah teks instruksi
+      const instruction = document.getElementById('cake-instruction');
+      instruction.innerText = '🎉 Yeay! Selamat Ulang Tahun! 🥳';
+      instruction.classList.remove('animate-pulse', 'text-rose-500');
+      instruction.classList.add('text-emerald-600', 'font-bold');
+
+      // Tampilkan Catatan Rahasia
+      const note = document.getElementById('secret-note');
+      note.classList.remove('hidden');
+      setTimeout(() => {
+        note.classList.remove('opacity-0', 'translate-y-2');
+      }, 50);
+
+      // Efek sebaran Bunga & Emoji Hati
+      popEffects();
+    }
+
+    function popEffects() {
+      const container = document.getElementById('effects-bg');
+      const icons = ['🌸', '✨', '💖', '🎉', '🍰'];
+
+      for (let i = 0; i < 35; i++) {
+        const item = document.createElement('div');
+        item.innerText = icons[Math.floor(Math.random() * icons.length)];
+        item.className = 'absolute text-xl animate-bounce';
+        item.style.left = Math.random() * 100 + 'vw';
+        item.style.top = Math.random() * 100 + 'vh';
+        item.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
+        container.appendChild(item);
+      }
+    }
+  </script>
+</body>
+</html>
